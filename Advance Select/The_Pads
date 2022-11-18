@@ -10,12 +10,11 @@
 -- where [occupation_count] is the number of occurrences of an occupation in OCCUPATIONS and [occupation] is the lowercase occupation name.
 -- If more than one Occupation has the same [occupation_count], they should be ordered alphabetically.
 
-select concat(name,'(',LEFT(Occupation,1),')') as Name 
-from occupations 
-order by Name;
+SELECT CONCAT(name, '(', LEFT(occupation,1), ')')as NAME
+FROM occupations
+ORDER BY NAME ASC;
 
-
-Select concat ('There are a total of ', ' ',count(occupation),' ', lower(occupation),'s.') as totals
-from occupations
-group by occupation
-order by totals;
+SELECT CONCAT('There are a total of', ' ', COUNT(occupation), ' ', LOWER(occupation), 's.')as totals
+FROM occupations
+GROUP BY occupation
+ORDER BY totals ASC, occupation ASC;
