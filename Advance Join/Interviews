@@ -1,0 +1,37 @@
+Write a query to print the contest_id, hacker_id, name, and the sums of total_submissions, total_accepted_submissions, total_views, and total_unique_views for each contest sorted by contest_id. Exclude the contest from the result if all four sums are .
+Note: A specific contest can be used to screen candidates at more than one college, but each college only holds  screening contest.
+
+SELECT ct.contest_id,
+        ct.hacker_id,
+        ct.name,
+        SUM(ss.sum_submission),
+        SUM(ss.sum_accepted),
+        SUM(sum_views),
+        SUM(sum_unique)
+FROM contests ct
+JOIN colleges cl ON ct.contest_id = cl.contest_id
+JOIN challenges ch ON cl.college_id = ch.college_id
+
+-- subquery to get total sums for the Submission stats.
+-- these subqueries use left joins, so that the unrelated/empty information is not joined.
+
+LEFT JOIN (SELECT challenge_id,
+                    SUM(total_submissions)as sum_submission,
+                    SUM(total_accepted_submissions)as sum_accepted
+          FROM submission_stats
+          GROUP BY challenge_id)ss ON ch.challenge_id = ss.challenge_id
+          
+-- another subquery to get total sums for Views stats          
+LEFT JOIN (SELECT challenge_id,
+                   SUM(total_views)as sum_views,
+                    SUM(total_unique_views)as sum_unique
+           FROM view_stats
+           GROUP BY challenge_id)vs ON ss.challenge_id = vs.challenge_id    
+GROUP BY ct.contest_id,ct.hacker_id,ct.name   
+
+-- HAVING works like WHERE, except over aggregations, which is what we want here.
+HAVING SUM(ss.sum_submission)+
+        SUM(ss.sum_accepted)+
+        SUM(sum_views)+
+        SUM(sum_unique) > 0
+ORDER BY ct.contest_id;
