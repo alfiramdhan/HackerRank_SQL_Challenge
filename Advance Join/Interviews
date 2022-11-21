@@ -16,18 +16,18 @@ JOIN challenges ch ON cl.college_id = ch.college_id
 -- subquery to get total sums for the Submission stats.
 -- these subqueries use left joins, so that the unrelated/empty information is not joined.
 
-LEFT JOIN (SELECT challenge_id,
+LEFT JOIN (SELECT s.challenge_id,
                     SUM(s.total_submissions)as total_submissions,
                     SUM(s.total_accepted_submissions)as total_accepted_submissions
           FROM submission_stats s
-          GROUP BY challenge_id)ss ON ch.challenge_id = ss.challenge_id
+          GROUP BY s.challenge_id)ss ON ch.challenge_id = ss.challenge_id
           
 -- another subquery to get total sums for Views stats          
-LEFT JOIN (SELECT challenge_id,
+LEFT JOIN (SELECT v.challenge_id,
                    SUM(v.total_views)as total_views,
                     SUM(v.total_unique_views)as total_unique_views
            FROM view_stats v
-           GROUP BY challenge_id)vs ON ss.challenge_id = vs.challenge_id    
+           GROUP BY v.challenge_id)vs ON ss.challenge_id = vs.challenge_id    
 GROUP BY ct.contest_id,ct.hacker_id,ct.name   
 
 -- HAVING works like WHERE, except over aggregations, which is what we want here.
