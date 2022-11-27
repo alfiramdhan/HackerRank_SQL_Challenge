@@ -6,6 +6,7 @@ Write a query to output all such symmetric pairs in ascending order by the value
 
 - NOTE: 
 Lets divide the output in 2 parts: 
+
 a. X=Y  
 for the (a) X=Y, We should check whether the entry (X,Y) WHERE X=Y is present in the table twice.
 If it is present 2 times then we can say the symmetric pair is present and add it in the output. 
