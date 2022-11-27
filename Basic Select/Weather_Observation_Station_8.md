@@ -1,6 +1,9 @@
--- Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters.
--- Your result cannot contain duplicates.
+## Case Study Question
 
+Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters.
+Your result cannot contain duplicates.
+
+```sql
 SELECT DISTINCT CITY
 FROM STATION
 WHERE (UPPER(CITY) LIKE 'a%'
@@ -12,3 +15,4 @@ WHERE (UPPER(CITY) LIKE 'a%'
                                     OR lower(CITY) LIKE '%u'
                                     OR lower(CITY) LIKE '%e'
                                     OR lower(CITY) LIKE '%o');
+```
