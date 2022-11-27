@@ -2,8 +2,9 @@
 
 Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates.
 
--- using mySQL :
 ```sql
+-- using mySQL :
+
 SELECT DISTINCT CITY
 FROM STATION
 WHERE upper(city) LIKE 'a%'
@@ -16,6 +17,7 @@ or shortcut
 
 ```sql
 -- using MS SQL Server :
+
 SELECT CITY
 FROM STATION
 WHERE CITY LIKE '[aiueo]%'
