@@ -1,15 +1,17 @@
+## Case Study Question
+
 Write a query to print the hacker_id, name, and the total number of challenges created by each student.
 Sort your results by the total number of challenges in descending order. If more than one student created the same number of challenges, then sort the result by hacker_id.
 If more than one student created the same number of challenges and the count is less than the maximum number of challenges created,
 then exclude those students from the result.
 
--- Use HAVING instead of WHERE since we have to filter on groups
--- Split the total number of counts into 2 pieces
--- First piece will be the largest number 
--- Second piece will be the number which doesn't repeat (Unique) or is available once
--- SELECT statement pada subquery HAVING should contains 1 column
+1. Use HAVING instead of WHERE since we have to filter on groups
+2. Split the total number of counts into 2 pieces
+3. First piece will be the largest number 
+4. Second piece will be the number which doesn't repeat (Unique) or is available once
+5. SELECT statement pada subquery HAVING should contains 1 column
 
-
+```sql
 SELECT h.hacker_id, h.name, count(ch.challenge_id) as number_challenge
 FROM hackers h
 JOIN challenges ch ON h.hacker_id = ch.hacker_id
@@ -29,3 +31,4 @@ HAVING number_challenge = (
                         GROUP BY total_unique
                         HAVING count(total_unique) =1 )
 ORDER BY number_challenge DESC, h.hacker_id;
+```
