@@ -1,6 +1,9 @@
+## Case Study Question
+
 Query the Western Longitude (LONG_W) for the largest Northern Latitude (LAT_N) in STATION that is less than 137.2345.
 Round your answer to 4 decimal places.
 
+```sql
 SELECT ROUND(LONG_W,4)
 FROM STATION 
 WHERE LAT_N IN (SELECT MAX(LAT_N)
@@ -8,4 +11,5 @@ WHERE LAT_N IN (SELECT MAX(LAT_N)
                 WHERE LAT_N < 137.2345
                 ORDER BY LAT_N DESC)
 ORDER BY LONG_W DESC
-LIMIT 1
+LIMIT 1;
+```
