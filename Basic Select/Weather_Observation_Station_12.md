@@ -15,3 +15,11 @@ WHERE (UPPER(CITY) NOT LIKE 'a%'
                                         AND lower(CITY) NOT LIKE '%e'
                                         AND lower(CITY) NOT LIKE '%o');
 ```
+
+using MS SQL Server
+```sql
+select distinct city
+from station
+where upper(city) not like '[aiueo]%'
+    and lower(city) not like '%[aiueo]'
+```
