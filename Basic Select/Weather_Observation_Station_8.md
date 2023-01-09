@@ -16,3 +16,10 @@ WHERE (UPPER(CITY) LIKE 'a%'
                                     OR lower(CITY) LIKE '%e'
                                     OR lower(CITY) LIKE '%o');
 ```
+
+using MS SQL Server
+```sql
+select distinct city
+from station
+where upper(city) like '[aiueo]%'
+    and lower(city) like '%[aiueo]'
